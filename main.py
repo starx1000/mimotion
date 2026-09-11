@@ -33,21 +33,9 @@ def get_min_max_by_time(hour=None, minute=None):
         hour = time_bj.hour
     if minute is None:
         minute = time_bj.minute
-    print(f"hour: {hour}, minute: {minute}")
-    time_rate = min((hour * 60 + minute) / (23 * 60), 1)
-    print(f"time_rate: {time_rate}")
-    min_step = get_int_value_default(config, 'MIN_STEP', 19000)
-    max_step = get_int_value_default(config, 'MAX_STEP', 28000)
-    min_step = 20000
-    max_step = 23000
-
-    print({int(0.4 * min_step)}, {int(0.4 * max_step)})
-    print({int(0.5 * min_step)}, {int(0.5 * max_step)})
-    print({int(0.6 * min_step)}, {int(0.6 * max_step)})
-    print({int(0.7 * min_step)}, {int(0.7 * max_step)})
-    print({int(0.8 * min_step)}, {int(0.8 * max_step)})
-    print({int(0.9 * min_step)}, {int(0.9 * max_step)})
-    print(f"min_step: {min_step}, max_step: {max_step}")
+    time_rate = min((hour * 60 + minute) / (22 * 60), 1)
+    min_step = get_int_value_default(config, 'MIN_STEP', 18000)
+    max_step = get_int_value_default(config, 'MAX_STEP', 25000)
     return int(time_rate * min_step), int(time_rate * max_step)
 
 
@@ -359,7 +347,6 @@ if __name__ == "__main__":
         print("未正确配置账号密码，无法执行")
         exit(1)
     min_step, max_step = get_min_max_by_time()
-    print(f"min_step: {min_step}, max_step: {max_step}")
     use_concurrent = config.get('USE_CONCURRENT')
     if use_concurrent is not None and use_concurrent == 'True':
         use_concurrent = True
@@ -367,4 +354,4 @@ if __name__ == "__main__":
         print(f"多账号执行间隔：{sleep_seconds}")
         use_concurrent = False
     # endregion
-    #execute()
+    execute()
